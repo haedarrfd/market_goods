@@ -3,6 +3,13 @@
 import { EmailContent, EmailProductInfo, NotificationType } from "@/types";
 import nodemailer from "nodemailer";
 
+type TransporterType = {
+  pool: boolean;
+  service: string;
+  port: number;
+  auth: {};
+};
+
 const Notification = {
   WELCOME: "WELCOME",
   CHANGE_OF_STOCK: "CHANGE_OF_STOCK",
@@ -88,7 +95,7 @@ const transporter = nodemailer.createTransport({
     user: process.env.EMAIL_USER,
     pass: process.env.EMAIL_PASS,
   },
-  maxConnection: 1,
+  maxConnections: 1,
 });
 
 export const sendEmail = async (
